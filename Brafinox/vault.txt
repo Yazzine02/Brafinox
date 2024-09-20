@@ -1,0 +1,7 @@
+db credentials:
+user
+0000
+
+Django superuser:
+user
+0000
