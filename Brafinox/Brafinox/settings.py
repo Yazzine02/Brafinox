@@ -78,10 +78,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Brafinox',
-        'USER': 'user',
-        'PASSWORD': '0000',
+        'USER': 'root',
+        'PASSWORD': '2003',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '65535',
     }
 }
 
