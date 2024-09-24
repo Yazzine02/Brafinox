@@ -29,3 +29,12 @@ signupLoginLink.forEach(link => {
         formPopup.classList[link.id === 'signup-link' ? 'add' : 'remove']("show-signup");
     });
 });
+
+// Redirection après connexion
+const loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Empêche la soumission normale du formulaire
+    // Redirige vers la page choice.html
+    window.location.href = "{% url 'choice' %}";
+});
