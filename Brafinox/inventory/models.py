@@ -47,7 +47,7 @@ class Sell(models.Model):
     ]
     client= models.ForeignKey('Client', on_delete=models.CASCADE)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-    bl = models.ForeignKey('BL', on_delete=models.CASCADE, related_name='sells')
+    bl = models.ForeignKey('BL', to_field='bl_code', on_delete=models.CASCADE, related_name='sells')
     quantity = models.PositiveIntegerField()
     sell_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     total_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)], editable=False)
@@ -91,7 +91,8 @@ class Buy(models.Model):
 # -----------------------------------------------------------
 
 class Payment(models.Model):
-    sell = models.ForeignKey('Sell',on_delete=models.CASCADE)
+    #change sell to bl
+    bl = models.ForeignKey('BL', to_field='bl_code',on_delete=models.CASCADE)
     client = models.ForeignKey('Client',on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10,decimal_places=2, validators=[MinValueValidator(0)])
     date = models.DateTimeField(default=timezone.now)
@@ -105,19 +106,16 @@ class BL(models.Model):
         ('pending','Pending'),
         ('completed','Completed')
     ]
+    bl_code = models.CharField(max_length=30, primary_key=True)
     client = models.ForeignKey('Client', on_delete=models.CASCADE)
     amount_paid = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     payment_status = models.CharField(max_length=15, choices=PAYMENT_STATUS_CHOICES, default='pending')
     bl_date = models.DateTimeField(default=timezone.now)
-
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    balance = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
+    
     def __str__(self):
         return f"BL #{self.id} for {self.client.first_name} {self.client.last_name}"
-    
-    # Dynamically calculate the total amount from related Sell entries
-    @property
-    def total_amount(self):
-        total = self.sells.aggregate(total=Sum('total_price'))['total']
-        return total if total is not None else 0
 
     def update_payment_status(self):
         if self.amount_paid >= self.total_amount:
@@ -125,6 +123,10 @@ class BL(models.Model):
         else:
             self.payment_status = 'pending'
         self.save()
+
+    def save(self, *args, **kwargs):
+        self.balance = self.total_price - self.amount_paid
+        super(BL, self).save(*args, **kwargs)
 
     @property
     def remaining_balance(self):

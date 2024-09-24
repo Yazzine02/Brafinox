@@ -1,0 +1,81 @@
+TRIGGER FOR SELLING ITEMS sell->product
+
+delimiter //
+create trigger update_stock_on_sale
+after insert on inventory_sell
+for each row
+begin
+declare current_stock int;
+select stock_unit into current_stock from inventory_product where id =NEW.product_id;
+if current_stock < NEW.quantity then
+signal SQLSTATE '45000'
+set MESSAGE_TEXT = 'Stock insuffisant pour cette vente';
+else
+update inventory_product
+set stock_unit = stock_unit - NEW.quantity
+where id = NEW.product_id;
+end if;
+end;
+//
+delimiter ;
+
+
+TRIGGER FOR BUYING ITEMS buy->product
+
+delimiter //
+create trigger update_stock_on_buy
+after insert on inventory_buy
+for each row
+begin
+update inventory_product
+set stock_unit = stock_unit + NEW.quantity
+where id = NEW.product_id;
+end;
+//
+delimiter ;
+
+
+TRIGGER FOR PAYMENT payment->BL
+
+delimiter //
+create trigger update_bl_on_payment
+after insert on inventory_payment
+for each row
+begin
+update inventory_bl
+set amount_paid = amount_paid + NEW.amount, payment_status = IF(amount_paid >= total_price, 'completed', 'pending')
+where bl_code = NEW.bl_id;
+end;
+//
+delimiter ;
+
+TRIGGER FOR BL->SELL STATUS
+
+DELIMITER //
+CREATE TRIGGER update_product_status_after_bl_insert
+AFTER INSERT ON inventory_bl
+FOR EACH ROW
+BEGIN
+    IF NEW.amount_paid >= NEW.total_price THEN
+        UPDATE sell
+        SET status = 'completed'
+        WHERE bl_id = NEW.bl_code;
+    END IF;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER update_product_status_after_bl_update
+AFTER UPDATE ON inventory_bl
+FOR EACH ROW
+BEGIN
+    IF NEW.amount_paid >= NEW.total_price THEN
+        UPDATE sell
+        SET status = 'completed'
+        WHERE bl_id = NEW.bl_code;
+    END IF;
+END;
+//
+DELIMITER ;
+
