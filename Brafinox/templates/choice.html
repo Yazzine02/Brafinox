@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>choice</title>
+    <link rel="stylesheet" href="{% static 'css/choice.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <span class="hamburger-btn material-symbols-rounded">menu</span>
+            <a href="#" class="logo">
+                <img src="https://tse3.mm.bing.net/th?id=OIG1.UXKq8Ejbw_hM5Xzq6vpO&pid=ImgGn" alt="logo">
+                <h2>BRAFINOX</h2>
+            </a>
+            <ul class="links">
+                <span class="close-btn material-symbols-rounded">close</span>
+                <li><a href="#"><b>Home</b></a></li>
+                <li><a href="#"><b>Help</b></a></li>
+
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="button-area stock">
+            <img src="https://media.istockphoto.com/id/1344231216/fr/photo/entrep%C3%B4t-de-m%C3%A9tal-lamin%C3%A9-de-nombreux-paquets-de-barres-m%C3%A9talliques-sur-les-%C3%A9tag%C3%A8res.jpg?s=612x612&w=0&k=20&c=M_u0POTbusopuElkEzi7Il4bEbxOvYEIyGSczGELUc8=" alt="Stock Image"
+                class="background-image">
+            <button class="button" id="stockBtn">Stock</button>
+        </div>
+        <div class="button-area client">
+            <img src="https://img.freepik.com/photos-gratuite/vue-rapprochee-poignee-main-deux-hommes-affaires-costume-se-serrant-main_1163-4891.jpg?t=st=1727108448~exp=1727112048~hmac=4a1ede678f825a0b9e24fd0d7adc584a07cbf91192d8cdaab159be0653680538&w=996" alt="Client Image"
+                class="background-image">
+            <button class="button" id="clientBtn">Client</button>
+        </div>
+    </div>
+
+    <script src="{% static 'js/choice.js' %}"></script>
+</body>
+
+</html>

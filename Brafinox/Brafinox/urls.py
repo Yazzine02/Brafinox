@@ -4,6 +4,7 @@ from inventory import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', views.home, name='login'),
-    path('choice/', views.choice, name='choice')
+    path('', views.login_view, name='login'),
+    path('choice/', views.choice_view, name='choice'),
 ]
+

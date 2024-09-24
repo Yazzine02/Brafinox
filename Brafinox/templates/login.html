@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,11 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website with login & Registration From</title>
-    <!-- Google Fonts Link For Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
-    <link rel="stylesheet" href="login.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="login.js" defer></script>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
 
 </head>
 
@@ -45,7 +44,7 @@
                 <form action="#">
                     <div class="input-field">
                         <input type="text" required>
-                        <label>Email</label>
+                        <label>nom d'utilisateur</label>
                     </div>
                     <div class="input-field">
                         <input type="password" required>
@@ -92,9 +91,8 @@
             </div>
         </div>
     </div>
-    <script src="login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'js/login.js' %}"></script>
 </body>
-
-
 
 </html>
