@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = 'home'  # Redirect after successful login (replace 'home' with your desired URL name)
+LOGOUT_REDIRECT_URL = 'home'  # Redirect after logout (to the login page)
 
 # Application definition
 
@@ -37,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'inventory'
+    'inventory',
+    'register'
 ]
 
 MIDDLEWARE = [
@@ -47,6 +50,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -78,10 +83,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Brafinox',
-        'USER': 'root',
-        'PASSWORD': '2003',
+        'USER': 'user',
+        'PASSWORD': '0000',
         'HOST': 'localhost',
-        'PORT': '65535',
+        'PORT': '3306',
     }
 }
 
