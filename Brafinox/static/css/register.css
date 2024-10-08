@@ -20,7 +20,7 @@ body, html {
     width: 100%; /* Pleine largeur */
     text-align: left; /* Alignement du texte à gauche */
     transition: transform 0.2s; /* Animation douce pour l'effet de survol */
-    margin: 0 auto; /* Centrer horizontalement */
+    margin: 0 auto;
 }
 
 /* Effet de survol pour le conteneur */
@@ -98,6 +98,8 @@ button:hover {
 }
 
 /* Style de la navbar */
+/* Style de la navbar */
+/* Style de la barre de navigation */
 nav {
     background-color: #0072ff; /* Couleur de fond de la barre de navigation */
     padding: 10px 20px; /* Rembourrage autour des éléments de la barre */
@@ -128,6 +130,8 @@ nav ul li a:hover {
     color: #ffcc00; /* Changer la couleur au survol */
 }
 
+
+
 /* Style du footer */
 footer {
     text-align: center; /* Centre le texte du footer */
@@ -138,3 +142,4 @@ footer {
     bottom: 0; /* Positionner en bas */
     width: 100%; /* Largeur complète */
 }
+

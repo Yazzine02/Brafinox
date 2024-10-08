@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Stock | BRAFINOX</title>
+    <link rel="stylesheet" href="{% static 'css/add_stock.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h1>Add Stock</h1>
+    </nav>
+
+    <div class="form-container">
+        <h2>Ajouter au Stock</h2>
+
+        <table id="stockTable">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Article</th>
+                    <th>Date</th>
+                    <th>Quantité</th>
+                    <th>Prix d'Achat (PA)</th>
+                    <th>Prix de Vente (PV)</th>
+                    <th>N° BL Fournisseur</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="code"></td>
+                    <td><input type="text" name="article"></td>
+                    <td><input type="date" name="date"></td>
+                    <td><input type="number" name="quantity"></td>
+                    <td><input type="number" name="purchase_price"></td>
+                    <td><input type="number" name="sale_price"></td>
+                    <td><input type="text" name="supplier_bl"></td>
+                    <td><input type="text" name="description"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button id="addRow">Ajouter une ligne</button>
+        <button id="saveButton">Enregistrer</button>
+        
+        <div class="errors"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 BRAFINOX. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        
+        document.getElementById('addRow').addEventListener('click', function() {
+            var table = document.getElementById('stockTable').getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow();
+            for (var i = 0; i < 8; i++) {
+                var newCell = newRow.insertCell(i);
+                var input = document.createElement('input');
+                if (i === 2) { // Pour la date
+                    input.type = 'date';
+                } else if (i === 3 || i === 4 || i === 5) { // Pour quantité et prix
+                    input.type = 'number';
+                } else {
+                    input.type = 'text';
+                }
+                newCell.appendChild(input);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

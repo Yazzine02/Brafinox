@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Pour que le footer reste en bas */
+}
+
+.navbar {
+    background-color: #007BFF; /* Couleur bleue pour la barre de navigation */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.form-container {
+    max-width: 800px; /* Largeur maximale du conteneur */
+    margin: 0; /* Supprimez l'auto-marge pour aligner à gauche */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1; /* Pour que le conteneur principal prenne tout l'espace disponible */
+    text-align: left; /* Aligne le texte à gauche */
+}
+
+h2 {
+    text-align: left; /* Aligne le titre à gauche */
+    color: #333;
+}
+
+table {
+    width: 100%; /* Assure que le tableau prend toute la largeur disponible */
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left; /* Aligne le texte dans les cellules à gauche */
+}
+
+th {
+    background-color: #007BFF; /* Couleur de fond pour l'en-tête */
+    color: white; /* Couleur du texte pour l'en-tête */
+}
+
+td {
+    background-color: #f9f9f9; /* Couleur de fond pour les cellules */
+}
+
+button {
+    display: inline-block;
+    width: calc(50% - 10px);
+    padding: 10px;
+    background-color: #007BFF; /* Couleur du bouton */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Taille de la police du bouton */
+    margin: 10px; /* Espace autour des boutons */
+}
+
+button:hover {
+    background-color: #0056b3; /* Couleur du bouton au survol */
+}
+
+.errors {
+    color: red; /* Couleur des messages d'erreur */
+    margin-top: 10px; /* Espace au-dessus du message d'erreur */
+}
+
+footer {
+    background-color: #007BFF; /* Couleur du footer */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative; /* Pour garder le footer au bas de la page */
+}
+
+footer p {
+    margin: 0; /* Suppression de la marge par défaut */
+}

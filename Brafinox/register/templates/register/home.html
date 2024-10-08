@@ -3,11 +3,86 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h2>Welcome to the Home Page</h2>
-    <p>Please choose an option:</p>
+<style>
+/* Cache la barre de navigation et le footer */
+nav, footer {
+    display: none;
+}
 
-    <div>
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'register' %}">Register</a>
+/* Styles globaux pour le body et html */
+body, html {
+    margin: 0; /* Supprime la marge par défaut */
+    padding: 0; /* Supprime le rembourrage par défaut */
+    box-sizing: border-box; /* Inclut le rembourrage et la bordure dans la largeur totale */
+}
+
+/* Style général de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh; /* Prendre toute la hauteur de la fenêtre */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #0072ff, #00c6ff); /* Dégradé dynamique */
+}
+
+/* Style de la boîte de contenu */
+.content-box {
+    background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond avec transparence */
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%; /* S'assurer que ça prenne tout l'espace disponible */
+    position: relative; /* Pour éviter les problèmes de superposition */
+    z-index: 1; /* Met la boîte de contenu au-dessus des autres éléments */
+}
+
+/* Style pour le titre */
+h1 {
+    font-size: 36px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Style pour le sous-titre */
+p {
+    font-size: 18px;
+    color: #34495e;
+    margin-bottom: 30px;
+}
+
+/* Style pour le groupe de boutons */
+.button-group {
+    margin-top: 20px;
+}
+
+/* Style des boutons */
+.btn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 25px;
+    margin: 0 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Ajout de l'effet de transformation */
+}
+
+.btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px); /* Légère élévation à l'hover */
+}
+</style>
+
+<div class="content-box">
+    <h1>Welcome to BRAFINOX</h1>
+    <p>Your one-stop solution for all your needs.</p>
+    <div class="button-group">
+        <a href="{% url 'login' %}" class="btn">Login</a>
+        <a href="{% url 'register' %}" class="btn">Register</a>
     </div>
+</div>
 {% endblock %}

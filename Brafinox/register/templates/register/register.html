@@ -1,18 +1,72 @@
-{% extends 'base.html' %}
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/login/">Login</a></li>
+                <li><a href="/register/">Register</a></li>
+            </ul>
+        </nav>
+    </header>
 
-{% block title %}Register{% endblock %}
+    <main>
+        <h2>Register</h2>
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
 
-{% block content %}
-    <h2>Register</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
+                <p class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Username:</label>
+                    {{ form.username }}  <!-- Utilisation du champ du formulaire -->
+                    {{ form.username.errors }}  <!-- Affichage des erreurs -->
+                    <span class="helptext">{{ form.username.help_text }}</span>
+                </p>
 
-    {% if form.errors %}
-        <div class="errors">
-            {{ form.errors }}
-        </div>
-    {% endif %}
-{% endblock %}
+                <p class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email address:</label>
+                    {{ form.email }}  <!-- Utilisation du champ du formulaire -->
+                    {{ form.email.errors }}  <!-- Affichage des erreurs -->
+                </p>
+
+                <p class="form-group">
+                    <label for="{{ form.password1.id_for_label }}">Password:</label>
+                    {{ form.password1 }}  <!-- Utilisation du champ du formulaire -->
+                    {{ form.password1.errors }}  <!-- Affichage des erreurs -->
+                    <span class="helptext">{{ form.password1.help_text }}</span>
+                </p>
+
+                <p class="form-group">
+                    <label for="{{ form.password2.id_for_label }}">Password confirmation:</label>
+                    {{ form.password2 }}  <!-- Utilisation du champ du formulaire -->
+                    {{ form.password2.errors }}  <!-- Affichage des erreurs -->
+                    <span class="helptext">{{ form.password2.help_text }}</span>
+                </p>
+
+                <button type="submit">S'inscrire</button>
+            </form>
+
+            <!-- Affichage des messages d'erreur/success -->
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div> 
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Django App</p>
+    </footer>
+</body>
+</html>

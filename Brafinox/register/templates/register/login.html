@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <h2>Login</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}"> <!-- Lien vers le CSS de login -->
+    
+    <div class="form-container"> <!-- Conteneur principal -->
+        <h2>Welcome, {{ user.username }}!</h2> <!-- Afficher le nom d'utilisateur -->
 
-    {% if form.errors %}
-        <div class="errors">
-            {{ form.errors }}
-        </div>
-    {% endif %}
+        <h3>Login</h3> <!-- Titre du formulaire -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+
+        {% if form.errors %}
+            <div class="errors">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
