@@ -2,18 +2,21 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator
 from django.db.models import Sum
-
 # Create your models here.
 # -----------------------------------------------------------
 class Product(models.Model):
-    name = models.CharField(max_length=150)
-    description = models.TextField()
-    stock_unit = models.PositiveIntegerField()
-    created_at = models.DateTimeField(default=timezone.now)
-    numero_bl = models.CharField(max_length=30,null=True, blank=True)
+    code = models.CharField(max_length=50, unique=True)
+    article = models.CharField(max_length=100)
+    date = models.DateField()
+    quantity = models.PositiveIntegerField()
+    purchase_price = models.DecimalField(max_digits=10, decimal_places=2)
+    selling_price = models.DecimalField(max_digits=10, decimal_places=2)
+    supplier_bl_number = models.CharField(max_length=50)
+    description = models.TextField(blank=True)
 
     def __str__(self):
-        return self.name
+        return self.article
+
 
 # -----------------------------------------------------------
 

@@ -39,6 +39,25 @@ def custom_login_view(request):
         form = AuthenticationForm()
     return render(request, 'register/login.html', {'form': form})
 
+
+
+
+
+from .forms import ProductForm
+from django.contrib import messages
+
+def add_stock_view(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "L'article a été ajouté au stock avec succès !")
+            return redirect('choice_view')  # Redirige vers la vue de choix après l'ajout
+        else:
+            messages.error(request, "Veuillez corriger les erreurs dans le formulaire.")
+    else:
+        form = ProductForm()
+    return render(request, 'register/add_stock.html', {'form': form})
 def choice_view(request):
     return render(request, 'register/choice.html')
 
