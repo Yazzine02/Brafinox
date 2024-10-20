@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator
 from django.db.models import Sum
+from django.core.exceptions import ValidationError
 # Create your models here.
 # -----------------------------------------------------------
 class Product(models.Model):
@@ -14,8 +15,9 @@ class Product(models.Model):
     supplier_bl_number = models.CharField(max_length=50)
     description = models.TextField(blank=True)
 
-    def __str__(self):
-        return self.article
+    def clean(self):
+        if self.purchase_price < 0 or self.selling_price < 0:
+            raise ValidationError("Les prix ne peuvent pas être négatifs.")
 
 
 # -----------------------------------------------------------

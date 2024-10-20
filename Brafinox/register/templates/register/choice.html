@@ -18,13 +18,15 @@
         <div class="button-area stock">
             <img src="https://media.istockphoto.com/id/1344231216/fr/photo/entrep%C3%B4t-de-m%C3%A9tal-lamin%C3%A9-de-nombreux-paquets-de-barres-m%C3%A9talliques-sur-les-%C3%A9tag%C3%A8res.jpg?s=612x612&w=0&k=20&c=M_u0POTbusopuElkEzi7Il4bEbxOvYEIyGSczGELUc8=" alt="Stock Image"
                 class="background-image">
-            <button class="button" onclick="window.location.href='{% url 'stock_view' %}'">Stock</button>
+                <a href="{% url 'stock_view' %}" class="button"> Stock</a>
+
         </div>
 
         <div class="button-area client">
             <img src="https://img.freepik.com/photos-gratuite/vue-rapprochee-poignee-main-deux-hommes-affaires-costume-se-serrant-main_1163-4891.jpg?t=st=1727108448~exp=1727112048~hmac=4a1ede678f825a0b9e24fd0d7adc584a07cbf91192d8cdaab159be0653680538&w=996" alt="Client Image"
                 class="background-image">
-            <button class="button" onclick="window.location.href='{% url 'client_view' %}'">Client</button>
+                <a href="{% url 'client_view' %}" class="button">Client</a>
+
         </div>
     </div>
 

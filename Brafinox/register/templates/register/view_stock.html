@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Stock | BRAFINOX</title>
+    <link rel="stylesheet" href="{% static 'css/view_stock.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h1>View Stock</h1>
+    </nav>
+
+    <div class="form-container">
+        <h2>Rechercher un article</h2>
+
+        <form method="GET" action="{% url 'view_stock_view' %}">
+            <input type="text" name="q" placeholder="Nom de l'article" value="{{ query }}">
+            <button type="submit">Rechercher</button>
+        </form>
+
+        <!-- Ajout d'un bouton pour exporter vers Excel -->
+        <form method="GET" action="{% url 'export_stock_to_excel' %}" style="margin: 20px 0;">
+            <button type="submit">Exporter vers Excel</button>
+        </form>
+
+        <table id="stockTable">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Nom de l'Article</th>
+                    <th>Quantité Restante</th>
+                    <th>Date de Dernière Mise à Jour</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.code }}</td>
+                    <td>{{ product.article }}</td> <!-- Corrigé ici -->
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.date|date:"Y-m-d " }}</td> <!-- Si tu veux afficher la date d'ajout -->
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">Aucun article trouvé.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button onclick="window.history.back();" class="button">Retour</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 BRAFINOX. Tous droits réservés.</p>
+    </footer>
+
+</body>
+
+</html>

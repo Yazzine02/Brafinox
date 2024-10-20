@@ -1,46 +1,46 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Pour que le footer reste en bas */
+    font-family: Arial, sans-serif; /* Police pour tout le corps */
+    background-color: #f7f7f7; /* Couleur de fond */
+    margin: 0; /* Supprime les marges par défaut */
+    padding: 0; /* Supprime les espacements par défaut */
+    display: flex; /* Utilise flexbox pour le layout */
+    flex-direction: column; /* Direction verticale */
+    min-height: 100vh; /* Assure que le footer reste en bas */
 }
 
 .navbar {
     background-color: #007BFF; /* Couleur bleue pour la barre de navigation */
-    color: white;
-    padding: 20px;
-    text-align: center;
+    color: white; /* Couleur du texte */
+    padding: 20px; /* Espacement interne */
+    text-align: center; /* Centre le texte */
 }
 
 .form-container {
     max-width: 800px; /* Largeur maximale du conteneur */
-    margin: 0; /* Supprimez l'auto-marge pour aligner à gauche */
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    flex-grow: 1; /* Pour que le conteneur principal prenne tout l'espace disponible */
+    margin: 0; /* Supprime l'auto-marge pour aligner à gauche */
+    padding: 20px; /* Espacement interne */
+    background-color: #ffffff; /* Couleur de fond blanche */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre pour le conteneur */
+    flex-grow: 1; /* Permet au conteneur de prendre tout l'espace disponible */
     text-align: left; /* Aligne le texte à gauche */
 }
 
 h2 {
     text-align: left; /* Aligne le titre à gauche */
-    color: #333;
+    color: #333; /* Couleur du texte */
 }
 
 table {
-    width: 100%; /* Assure que le tableau prend toute la largeur disponible */
-    border-collapse: collapse;
-    margin: 20px 0;
+    width: 100%; /* Le tableau prend toute la largeur disponible */
+    border-collapse: collapse; /* Fusionne les bordures des cellules */
+    margin: 20px 0; /* Marge au-dessus et en dessous du tableau */
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left; /* Aligne le texte dans les cellules à gauche */
+    border: 1px solid #ddd; /* Bordure des cellules */
+    padding: 12px; /* Espacement interne des cellules */
+    text-align: left; /* Aligne le texte à gauche */
 }
 
 th {
@@ -52,21 +52,27 @@ td {
     background-color: #f9f9f9; /* Couleur de fond pour les cellules */
 }
 
-button {
-    display: inline-block;
-    width: calc(50% - 10px);
-    padding: 10px;
-    background-color: #007BFF; /* Couleur du bouton */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px; /* Taille de la police du bouton */
-    margin: 10px; /* Espace autour des boutons */
+/* Ajuster la largeur de la colonne Action */
+td:nth-child(9) {
+    width: 120px; /* Largeur minimale pour la colonne des boutons */
+    white-space: nowrap; /* Empêche le mot "Supprimer" d'être coupé */
 }
 
-button:hover {
-    background-color: #0056b3; /* Couleur du bouton au survol */
+.button {
+    display: inline-block; /* Affiche comme un bouton */
+    padding: 10px 20px; /* Espacement interne */
+    background-color: #007BFF; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte */
+    text-align: center; /* Centre le texte */
+    border: none; /* Pas de bordure */
+    border-radius: 4px; /* Coins arrondis */
+    text-decoration: none; /* Supprime le soulignement */
+    cursor: pointer; /* Change le curseur au survol */
+    font-size: 16px; /* Taille de la police */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Couleur au survol */
 }
 
 .errors {
@@ -76,12 +82,50 @@ button:hover {
 
 footer {
     background-color: #007BFF; /* Couleur du footer */
-    color: white;
-    text-align: center;
-    padding: 10px 0;
+    color: white; /* Couleur du texte du footer */
+    text-align: center; /* Centre le texte */
+    padding: 10px 0; /* Espacement interne */
     position: relative; /* Pour garder le footer au bas de la page */
 }
 
 footer p {
     margin: 0; /* Suppression de la marge par défaut */
+}
+.messages {
+    margin: 20px 0;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #fff; /* Couleur du texte */
+    display: flex;
+    align-items: center;
+    animation: fadeIn 0.5s; /* Animation pour l'apparition des messages */
+}
+
+.alert.success {
+    background-color: #4caf50; /* Vert */
+}
+
+.alert.error {
+    background-color: #f44336; /* Rouge */
+}
+
+.alert.warning {
+    background-color: #ff9800; /* Orange */
+}
+
+.alert.info {
+    background-color: #2196F3; /* Bleu */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

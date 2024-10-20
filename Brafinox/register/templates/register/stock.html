@@ -18,13 +18,16 @@
         <div class="button-area add-stock">
             <img src="https://img.freepik.com/photos-gratuite/boite-grand-angle-fleche-rouge_23-2148790075.jpg?t=st=1728385032~exp=1728388632~hmac=2375fd097e90941046fafac9ff70dcaa259c132b7b84205f8cae28c5fa5646a4&w=826" alt="Ajouter au Stock Image"
                 class="background-image">
-            <button class="button" onclick="window.location.href='{% url 'add_stock_view' %}'">Ajouter au Stock</button>
+                <a href="{% url 'add_stock_view' %}" class="button">Ajouter au Stock</a>
+
+
         </div>
 
         <div class="button-area view-stock">
             <img src="https://img.freepik.com/photos-premium/logiciel-comptabilite-ecran-ordinateur-montrant-etats-financiers-maniere-homogene_31965-562046.jpg?w=1060" alt="Voir le Stock Image"
                 class="background-image">
-            <button class="button" onclick="window.location.href='{% url 'view_stock_view' %}'">Voir le Stock</button>
+                <a href="{% url 'view_stock_view' %}" class="button"> Voir le Stock</a>
+
         </div>
     </div>
 

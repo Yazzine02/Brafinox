@@ -11,45 +11,57 @@
 </head>
 
 <body>
-
     <nav class="navbar">
         <h1>Add Stock</h1>
     </nav>
 
     <div class="form-container">
         <h2>Ajouter au Stock</h2>
-
-        <table id="stockTable">
-            <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Article</th>
-                    <th>Date</th>
-                    <th>Quantité</th>
-                    <th>Prix d'Achat (PA)</th>
-                    <th>Prix de Vente (PV)</th>
-                    <th>N° BL Fournisseur</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="text" name="code"></td>
-                    <td><input type="text" name="article"></td>
-                    <td><input type="date" name="date"></td>
-                    <td><input type="number" name="quantity"></td>
-                    <td><input type="number" name="purchase_price"></td>
-                    <td><input type="number" name="sale_price"></td>
-                    <td><input type="text" name="supplier_bl"></td>
-                    <td><input type="text" name="description"></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <button id="addRow">Ajouter une ligne</button>
-        <button id="saveButton">Enregistrer</button>
+        <div class="messages">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
         
-        <div class="errors"></div>
+
+        <form id="stockForm" method="POST" action="{% url 'add_stock_view' %}">
+            {% csrf_token %}
+            <table id="stockTable">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Article</th>
+                        <th>Date</th>
+                        <th>Quantité</th>
+                        <th>Prix d'Achat (PA)</th>
+                        <th>Prix de Vente (PV)</th>
+                        <th>N° BL Fournisseur</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="code[]"></td>
+<td><input type="text" name="article[]"></td>
+<td><input type="date" name="date[]"></td>
+<td><input type="number" name="quantity[]"></td>
+<td><input type="number" name="purchase_price[]"></td>
+<td><input type="number" name="selling_price[]"></td>
+<td><input type="text" name="supplier_bl_number[]"></td>
+<td><input type="text" name="description[]"></td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="button" id="addRow">Ajouter une ligne</button>
+            <button type="submit" id="saveButton">Enregistrer</button>
+        </form>
+
+        <button onclick="window.history.back();" class="button">Retour</button>
     </div>
 
     <footer>
@@ -57,25 +69,39 @@
     </footer>
 
     <script>
-        
+        // Fonction pour ajouter une nouvelle ligne avec un bouton "Supprimer"
         document.getElementById('addRow').addEventListener('click', function() {
             var table = document.getElementById('stockTable').getElementsByTagName('tbody')[0];
             var newRow = table.insertRow();
-            for (var i = 0; i < 8; i++) {
+            for (var i = 0; i < 9; i++) { // Nous avons maintenant 9 colonnes
                 var newCell = newRow.insertCell(i);
-                var input = document.createElement('input');
-                if (i === 2) { // Pour la date
-                    input.type = 'date';
-                } else if (i === 3 || i === 4 || i === 5) { // Pour quantité et prix
-                    input.type = 'number';
+                if (i < 8) {
+                    var input = document.createElement('input');
+                    if (i === 2) { // Pour la date
+                        input.type = 'date';
+                    } else if (i === 3 || i === 4 || i === 5) { // Pour quantité et prix
+                        input.type = 'number';
+                    } else {
+                        input.type = 'text';
+                    }
+                    // Ajout des crochets pour le nom
+                    input.name = ['code', 'article', 'date', 'quantity', 'purchase_price', 'selling_price', 'supplier_bl_number', 'description'][i] + '[]'; 
+                    newCell.appendChild(input);
                 } else {
-                    input.type = 'text';
+                    // Ajouter le bouton "Supprimer" dans la dernière cellule
+                    var deleteButton = document.createElement('button');
+                    deleteButton.type = 'button';
+                    deleteButton.className = 'deleteRow';
+                    deleteButton.textContent = 'Supprimer';
+                    deleteButton.addEventListener('click', function() {
+                        var row = this.parentNode.parentNode;
+                        row.parentNode.removeChild(row);
+                    });
+                    newCell.appendChild(deleteButton);
                 }
-                newCell.appendChild(input);
             }
         });
     </script>
-
+    
 </body>
-
 </html>

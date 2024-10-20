@@ -1,140 +1,191 @@
-/* Style global pour le corps et l'HTML */
 body, html {
     display: flex;
-    flex-direction: column; /* Disposition en colonne */
-    justify-content: center; /* Centre le contenu verticalement */
-    align-items: center; /* Centre le contenu horizontalement */
-    height: 100vh; /* Prend toute la hauteur de la vue */
-    margin: 0; /* Supprime les marges par défaut */
-    background: linear-gradient(to right, #85E3FF, #B2E0F5); /* Votre dégradé */
-    font-family: 'Arial', sans-serif; /* Police par défaut */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, #85E3FF, #B2E0F5);
+    font-family: 'Arial', sans-serif;
 }
 
-/* Style du conteneur de formulaire */
 .form-container {
-    background: white; /* Fond blanc */
-    border-radius: 15px; /* Coins arrondis */
-    padding: 60px; /* Rembourrage interne */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Ombre autour du conteneur */
-    max-width: 450px; /* Largeur maximale */
-    width: 100%; /* Pleine largeur */
-    text-align: left; /* Alignement du texte à gauche */
-    transition: transform 0.2s; /* Animation douce pour l'effet de survol */
-    margin: 0 auto; /* Centrer horizontalement */
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.2s;
+    margin: 20px auto;
 }
 
-/* Effet de survol pour le conteneur */
 .form-container:hover {
-    transform: scale(1.02); /* Légère augmentation de taille au survol */
+    transform: scale(1.02);
 }
 
-/* Style du titre du formulaire */
 h2 {
-    font-size: 26px; /* Taille de la police */
-    color: #0072ff; /* Couleur de texte bleu */
-    margin-bottom: 20px; /* Marge en bas */
-    text-align: center; /* Centrer le titre */
+    font-size: 26px;
+    color: #0072ff;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-/* Styles des groupes de formulaire (champs) */
 .form-group {
-    margin-bottom: 20px; /* Marge en bas des groupes de formulaire */
+    margin-bottom: 20px;
 }
 
-/* Style des labels */
 label {
-    display: block; /* Les labels prennent toute la ligne */
-    font-weight: bold; /* Écriture en gras */
-    color: #333; /* Couleur gris foncé */
-    margin-bottom: 5px; /* Espace en bas pour le label */
+    display: block;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
 }
 
-/* Style des champs de formulaire */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-    width: calc(100% - 20px); /* Largeur pleine en tenant compte du rembourrage */
-    padding: 12px; /* Rembourrage interne pour les champs */
-    border: 2px solid #0072ff; /* Bord bleu */
-    border-radius: 8px; /* Coins arrondis */
-    font-size: 16px; /* Taille de la police */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Animation lors du focus */
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #0072ff;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
 }
 
-/* Effet de focus pour les champs de saisie */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
-    border-color: #0056b3; /* Changer la couleur du bord */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ombre douce */
-    outline: none; /* Supprime le contour par défaut */
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
 }
 
-/* Style du bouton d'envoi */
 button {
-    background-color: #0072ff; /* Couleur de fond bleu */
-    color: white; /* Couleur du texte */
-    padding: 12px 20px; /* Rembourrage interne */
-    border: none; /* Pas de bord */
-    border-radius: 6px; /* Coins arrondis */
-    font-size: 18px; /* Taille de la police */
-    font-weight: bold; /* Écriture en gras */
-    cursor: pointer; /* Curseur en main */
-    transition: background-color 0.3s ease, transform 0.3s; /* Animation douce */
-    width: 100%; /* Rendre le bouton plein largeur */
+    background-color: #0072ff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s;
+    width: 100%;
 }
 
-/* Effet de survol pour le bouton */
 button:hover {
-    background-color: #0056b3; /* Changer la couleur au survol */
-    transform: scale(1.05); /* Légère augmentation de taille au survol */
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
 
-/* Style pour les messages d'erreur */
 .errors {
-    color: red; /* Couleur rouge pour les erreurs */
-    margin-top: 10px; /* Espace au-dessus des messages d'erreur */
-    font-size: 14px; /* Taille de police des messages d'erreur */
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-/* Style de la navbar */
 nav {
-    background-color: #0072ff; /* Couleur de fond de la barre de navigation */
-    padding: 10px 20px; /* Rembourrage autour des éléments de la barre */
-    border-radius: 10px; /* Coins arrondis */
-    display: flex; /* Utiliser Flexbox pour aligner les éléments */
-    justify-content: center; /* Centre horizontalement */
+    background-color: #0072ff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 nav ul {
-    list-style: none; /* Supprime les puces */
-    padding: 0; /* Supprime le rembourrage par défaut */
-    margin: 0; /* Supprime la marge par défaut */
-    display: flex; /* Aligne les éléments horizontalement */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
 }
 
 nav ul li {
-    margin: 0 15px; /* Espace entre les éléments */
+    margin: 0 15px;
 }
 
 nav ul li a {
-    text-decoration: none; /* Supprime le soulignement des liens */
-    color: white; /* Couleur du texte */
-    font-weight: bold; /* Écriture en gras */
-    transition: color 0.3s; /* Animation douce pour le changement de couleur */
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: #ffcc00; /* Changer la couleur au survol */
+    color: #ffcc00;
 }
 
-/* Style du footer */
 footer {
-    text-align: center; /* Centre le texte du footer */
-    padding: 10px; /* Rembourrage interne */
-    background-color: #0072ff; /* Couleur de fond du footer */
-    color: white; /* Couleur du texte */
-    position: relative; /* Position relative */
-    bottom: 0; /* Positionner en bas */
-    width: 100%; /* Largeur complète */
+    text-align: center;
+    padding: 10px;
+    background-color: #0072ff;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
+.form-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    transition: transform 0.2s;
+    margin: 20px auto;
+}
+
+.form-container:hover {
+    transform: scale(1.02);
+}
+
+h2 {
+    font-size: 26px;
+    color: #0072ff;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.button {
+    display: inline-block;
+    background-color: #0072ff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s;
+    text-decoration: none;
+    margin: 10px 5px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.button.secondary {
+    background-color: #6c757d;
+}
+
+.button.secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Ajoutez ces styles à vos styles CSS existants */

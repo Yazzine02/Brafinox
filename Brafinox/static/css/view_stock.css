@@ -1,0 +1,140 @@
+/* Corps de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Pour que le footer reste en bas */
+}
+
+/* Navigation */
+.navbar {
+    background-color: #007BFF; /* Couleur bleue pour la barre de navigation */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour la navbar */
+}
+
+/* Conteneur du formulaire */
+.form-container {
+    max-width: 800px; /* Largeur maximale du conteneur */
+    margin: 20px auto; /* Centrer le conteneur */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px; /* Coins arrondis */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre plus douce */
+    flex-grow: 1; /* Pour que le conteneur principal prenne tout l'espace disponible */
+    text-align: left; /* Aligne le texte à gauche */
+}
+
+/* Titres */
+h2 {
+    text-align: left; /* Aligne le titre à gauche */
+    color: #333;
+    font-size: 24px; /* Augmenter la taille du titre */
+    margin-bottom: 20px; /* Espace sous le titre */
+}
+
+/* Tableau */
+table {
+    width: 100%; /* Assure que le tableau prend toute la largeur disponible */
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: none; /* Supprime les bordures des cellules */
+    padding: 15px; /* Garder le padding pour des cellules plus grandes */
+    text-align: left; /* Aligne le texte dans les cellules à gauche */
+    font-size: 16px; /* Taille de la police pour une meilleure visibilité */
+}
+
+/* En-têtes de tableau */
+th {
+    background-color: #007BFF; /* Couleur de fond pour l'en-tête */
+    color: white; /* Couleur du texte pour l'en-tête */
+    font-weight: bold; /* Gras pour les en-têtes */
+}
+
+/* Cellules de données */
+td {
+    background-color: #f9f9f9; /* Couleur de fond pour les cellules */
+    transition: background-color 0.3s; /* Transition pour un effet au survol */
+}
+
+td:hover {
+    background-color: #e2e2e2; /* Couleur au survol des cellules */
+}
+
+/* Boutons */
+button {
+    padding: 10px 15px;
+    background-color: #007BFF; /* Couleur du bouton */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Taille de la police du bouton */
+    margin-top: 10px; /* Espace au-dessus des boutons */
+    transition: background-color 0.3s; /* Transition pour l'effet au survol */
+}
+
+button:hover {
+    background-color: #0056b3; /* Couleur du bouton au survol */
+}
+
+/* Bouton de retour */
+.button {
+    display: inline-block; /* Pour le rendre comme un bouton */
+    padding: 10px 20px; /* Espacement interne */
+    background-color: #007BFF; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte */
+    text-align: center; /* Centrer le texte */
+    border: none; /* Pas de bordure */
+    border-radius: 4px; /* Coins arrondis */
+    text-decoration: none; /* Supprimer le soulignement */
+    cursor: pointer; /* Changer le curseur au survol */
+    font-size: 16px; /* Taille de la police */
+    margin-top: 20px; /* Espace au-dessus du bouton */
+    transition: background-color 0.3s; /* Effet de transition */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Couleur au survol */
+}
+
+/* Pied de page */
+footer {
+    background-color: #007BFF; /* Couleur du footer */
+    color: white;
+    text-align: center;
+    padding: 15px 0; /* Augmentez le padding pour un meilleur espacement */
+    position: relative; /* Pour garder le footer au bas de la page */
+    margin-top: auto; /* Permet de pousser le footer en bas */
+}
+
+footer p {
+    margin: 0; /* Suppression de la marge par défaut */
+}
+
+/* Champ de recherche */
+input[type="text"] {
+    width: 100%; /* Occupe toute la largeur du conteneur */
+    padding: 10px 15px; /* Espacement intérieur pour un meilleur confort */
+    font-size: 16px; /* Taille de la police */
+    border: 1px solid #ccc; /* Bordure grise claire */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transitions pour l'effet au focus */
+    margin-bottom: 15px; /* Espace sous le champ de recherche */
+}
+
+/* Effet au focus sur le champ de recherche */
+input[type="text"]:focus {
+    border-color: #007BFF; /* Changement de couleur de bordure au focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Ombre accentuée au focus */
+    outline: none; /* Suppression du contour par défaut */
+}

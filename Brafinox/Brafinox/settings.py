@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL = 'choice_view'  # Redirect after successful login (replace 'home' with your desired URL name)
 LOGOUT_REDIRECT_URL = 'home'  # Redirect after logout (to the login page)
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'Brafinox.urls'
@@ -60,7 +62,7 @@ ROOT_URLCONF = 'Brafinox.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
