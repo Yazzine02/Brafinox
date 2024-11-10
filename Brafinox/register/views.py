@@ -103,8 +103,44 @@ def choice_view(request):
 def stock_view(request):
     return render(request, 'register/stock.html')
 
+@csrf_exempt
 def client_view(request):
-    return render(request, 'register/client.html')
+    # Render the form
+    if request.method == 'GET':
+        return render(request, 'register/client.html')
+
+    # Process data and generate Excel file
+    elif request.method == 'POST':
+        # Parse form data from request
+        table_data = {
+            'Date de vente': request.POST.getlist('date_vente[]'),
+            'num BL': request.POST.getlist('num_bl[]'),
+            'Valeur BL': request.POST.getlist('val_bl[]'),
+            'Nom client': request.POST.getlist('nom_client[]'),
+            'Article': request.POST.getlist('article[]'),
+            'Quantite': request.POST.getlist('quantite[]'),
+            'Date de paiement': request.POST.getlist('date_paiement[]'),
+            'Mode de paiement': request.POST.getlist('mode_paiement[]'),
+            'Total a payer': request.POST.getlist('total_a_payer[]'),
+            'Reste a payer': request.POST.getlist('reste_a_payer[]'),
+            'Avoir sur le bl': request.POST.getlist('avoir_bl[]'),
+            'rq1': request.POST.getlist('rq1[]'),
+            'rq2': request.POST.getlist('rq2[]')
+        }
+
+        # Create DataFrame from the table data
+        df = pd.DataFrame(table_data)
+
+        # Generate Excel file in memory
+        buffer = io.BytesIO()
+        with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+            df.to_excel(writer, index=False, sheet_name='VenteData')
+
+        # Rewind buffer and prepare the response
+        buffer.seek(0)
+        response = HttpResponse(buffer, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="vente_data.xlsx"'
+        return response
 
 def view_stock_view(request):
     query = request.GET.get('q', '')
@@ -186,3 +222,59 @@ def export_stock_to_excel(request):
     
     return response
 
+def export_to_excel(request):
+    if request.method == 'POST':
+        # Create a new workbook and active sheet
+        workbook = openpyxl.Workbook()
+        worksheet = workbook.active
+        worksheet.title = 'Tableau de Vente'
+
+        # Define table headers
+        headers = [
+            'Date de vente', 'num BL', 'Valeur BL', 'Nom client', 'Article',
+            'Quantite', 'Date de paiement', 'Mode de paiement', 'Total a payer',
+            'Reste a payer', 'Avoir sur le bl', 'rq1', 'rq2'
+        ]
+        worksheet.append(headers)
+
+        # Style headers
+        header_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")  # Yellow
+        header_font = Font(bold=True)
+        for cell in worksheet[1]:
+            cell.fill = header_fill
+            cell.font = header_font
+
+        # Collect data from form inputs
+        rows = zip(
+            request.POST.getlist('date_vente[]'), request.POST.getlist('num_bl[]'),
+            request.POST.getlist('val_bl[]'), request.POST.getlist('nom_client[]'),
+            request.POST.getlist('article[]'), request.POST.getlist('quantite[]'),
+            request.POST.getlist('date_paiement[]'), request.POST.getlist('mode_paiement[]'),
+            request.POST.getlist('total_a_payer[]'), request.POST.getlist('reste_a_payer[]'),
+            request.POST.getlist('avoir_bl[]'), request.POST.getlist('rq1[]'), request.POST.getlist('rq2[]')
+        )
+
+        # Define border style for cells
+        thin_border = Border(left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
+
+        # Append rows and apply alternating row colors
+        for row_idx, row_data in enumerate(rows, start=2):
+            worksheet.append(row_data)
+            for cell in worksheet[row_idx]:
+                cell.border = thin_border
+                cell.fill = PatternFill(start_color="D9EAD3" if row_idx % 2 == 0 else "FFFFFF", fill_type="solid")  # Alternating row colors
+
+        # Set column widths
+        column_widths = [15, 10, 10, 20, 15, 10, 15, 15, 15, 15, 20, 10, 10]
+        for i, width in enumerate(column_widths):
+            worksheet.column_dimensions[openpyxl.utils.get_column_letter(i + 1)].width = width
+
+        # Save workbook to in-memory file and send it as response
+        output = BytesIO()
+        workbook.save(output)
+        output.seek(0)
+
+        response = HttpResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=vente_data.xlsx'
+        return response
+    return HttpResponse("Invalid request method", status=405)

@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vente | BRAFINOX</title>
+    <link rel="stylesheet" href="{% static 'css/client_view.css' %}">
+</head>
+
+<body>
+<nav class="navbar">
+    <h1>Vente</h1>
+</nav>
+
+<div class="form-container">
+    <h2>Tableau de Vente</h2>
+    <div class="messages">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Updated form action URL -->
+    <form id="venteForm" method="POST" action="{% url 'export_excel' %}">
+        <div class="table-container">
+            {% csrf_token %}
+            <table id="venteTable">
+                <thead>
+                <tr>
+                    <th>Date de vente</th>
+                    <th>num BL</th>
+                    <th>Valeur BL</th>
+                    <th>Nom client</th>
+                    <th>Article</th>
+                    <th>Quantite</th>
+                    <th>Date de paiement</th>
+                    <th>Mode de paiement</th>
+                    <th>Total a payer</th>
+                    <th>Reste a payer</th>
+                    <th>Avoir sur le bl</th>
+                    <th>rq1</th>
+                    <th>rq2</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="date" name="date_vente[]"></td>
+                    <td><input type="text" name="num_bl[]"></td>
+                    <td><input type="text" name="val_bl[]"></td>
+                    <td><input type="text" name="nom_client[]"></td>
+                    <td><input type="text" name="article[]"></td>
+                    <td><input type="number" name="quantite[]"></td>
+                    <td><input type="date" name="date_paiement[]"></td>
+                    <td><input type="text" name="mode_paiement[]"></td>
+                    <td><input type="number" name="total_a_payer[]"></td>
+                    <td><input type="number" name="reste_a_payer[]"></td>
+                    <td><input type="text" name="avoir_bl[]"></td>
+                    <td><input type="text" name="rq1[]"></td>
+                    <td><input type="text" name="rq2[]"></td>
+                    <td><button type="button" class="deleteRow">Supprimer</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Updated export button with type="submit" -->
+        <button type="button" id="addRow">Ajouter une ligne</button>
+        <button type="submit" id="exportButton">Exporter en Excel</button>
+    </form>
+
+    <button onclick="window.history.back();" id="Retour">Retour</button>
+</div>
+
+<footer>
+    <p>&copy; 2024 BRAFINOX. Tous droits réservés.</p>
+</footer>
+
+<script>
+    // Add row functionality
+    document.getElementById('addRow').addEventListener('click', function() {
+        var table = document.getElementById('venteTable').getElementsByTagName('tbody')[0];
+        var newRow = table.rows[0].cloneNode(true);
+        newRow.querySelectorAll('input').forEach(input => input.value = '');
+
+        newRow.querySelector('.deleteRow').addEventListener('click', function() {
+            var row = this.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        });
+
+        table.appendChild(newRow);
+    });
+
+    // Delete row functionality
+    document.querySelectorAll('.deleteRow').forEach(button => {
+        button.addEventListener('click', function() {
+            var row = this.parentNode.parentNode;
+            if (document.querySelectorAll('#venteTable tbody tr').length > 1) {
+                row.parentNode.removeChild(row);
+            } else {
+                alert("Au moins une ligne est requise.");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
